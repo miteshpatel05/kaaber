@@ -4,6 +4,8 @@ namespace App\Library;
 use App\Models\Ewaybill;
 use App\Models\Ewbmasters;
 use App\Models\Setting;
+use App\Models\vehicle;
+use App\Models\VehicleEwaybillMaster;
 use Illuminate\Support\Facades\Http;
 
 class EwbHelper{
@@ -88,13 +90,16 @@ class EwbHelper{
         $params['username'] =  $this->crd->eway_username;
         $params['ewbpwd'] =  $this->crd->eway_ewbpwd;
         $params['authtoken'] = $this->token;
-
         $params['ewbNo'] = $ewbNo;
 
         $url =  $this->crd->eway_ewaybill_url.http_build_query($params);
 
         $response = Http::get($url);
         $value = json_decode($response->body());
+
+        echo "<pre>";
+        print_r($value);
+        // exit;
 
         $ewayBillDate = str_replace("/", "-", $value->ewayBillDate);
         $docDate = str_replace("/", "-", $value->docDate);
@@ -107,9 +112,9 @@ class EwbHelper{
         $value->docDate = date('Y-m-d', strtotime($docDate));
         $value->validUpto = date('Y-m-d H:i:s', strtotime($validUpto));
 
-        $value->transitDays = 0;//get_days_kms($value->actualDist);
-        $value->remainDist = 0;//$value->actualDist;
-        $value->remainDays = 0;//get_days_kms($value->actualDist);
+        $value->transitDays = 0;
+        $value->remainDist = 0;
+        $value->remainDays = 0;
 
         $ewaybill = Ewaybill::where('ewbNo',$value->ewbNo)->first();
 
@@ -121,90 +126,121 @@ class EwbHelper{
             if($ewaybill->save()) {
 
                 $ewbVehicles = unserialize($value->VehiclListDetails);
+                foreach ($ewbVehicles as $k => $v) {
 
-                if(isset($ewbVehicles[0]) AND ! empty(isset($ewbVehicles[0]))) {
+                    $vem = new VehicleEwaybillMaster();
 
-                    foreach ($ewbVehicles as $k => $v) {
+                    $ewaybillid = $ewaybill->id;
 
-                        $ewbmaster = new Ewbmasters();
-                        $eDate = str_replace("/", "-", $v->enteredDate);
-                        $enteredDate = date('Y-m-d H:i:s', strtotime($eDate));
+                    $eDate = str_replace("/", "-", $v->enteredDate);
+                    $enteredDate = date('Y-m-d H:i:s', strtotime($eDate));
+                    $tDocDate = str_replace("/", "-", $v->transDocDate);
+                    $transDocDate = date('Y-m-d H:i:s', strtotime($tDocDate));
 
-                        $tDocDate = str_replace("/", "-", $v->transDocDate);
-                        $transDocDate = date('Y-m-d H:i:s', strtotime($tDocDate));
+                    $vem->vehicleno = $v->vehicleNo;
+                    $vem->eid = $ewaybillid;
+                    $vem->updMode = $v->updMode;
+                    $vem->fromPlace = $v->fromPlace;
+                    $vem->fromState = $v->fromState;
+                    $vem->tripshtNo = $v->tripshtNo;
+                    $vem->userGSTINTransin = $v->userGSTINTransin;
+                    $vem->enteredDate = $enteredDate;
+                    $vem->transMode = $v->transMode;
+                    $vem->transDocNo = $v->transDocNo;
+                    $vem->transDocDate = $transDocDate;
+                    $vem->groupNo = $v->groupNo;
 
-                        $ewbmaster->ewbId = $ewaybill->id;
-                        $ewbmaster->ewbNo = $value->ewbNo;
-                        $ewbmaster->ewayBillDate = $value->ewayBillDate;
-                        $ewbmaster->genMode = $value->genMode;
-                        $ewbmaster->userGstin = $value->userGstin;
-                        $ewbmaster->supplyType = $value->supplyType;
-                        $ewbmaster->subSupplyType = $value->subSupplyType;
-                        $ewbmaster->docType = $value->docType;
-                        $ewbmaster->docNo = $value->docNo;
-                        $ewbmaster->docDate = $value->docDate;
-                        $ewbmaster->fromGstin = $value->fromGstin;
-                        $ewbmaster->fromTrdName = $value->fromTrdName;
-                        $ewbmaster->fromAddr1 = $value->fromAddr1;
-                        $ewbmaster->fromAddr2 = $value->fromAddr2;
-                        $ewbmaster->fromPlace = $value->fromPlace;
-                        $ewbmaster->fromPincode = $value->fromPincode;
-                        $ewbmaster->fromStateCode = $value->fromStateCode;
-                        $ewbmaster->toGstin = $value->toGstin;
-                        $ewbmaster->toTrdName = $value->toTrdName;
-                        $ewbmaster->toAddr1 = $value->toAddr1;
-                        $ewbmaster->toAddr2 = $value->toAddr2;
-                        $ewbmaster->toPlace = $value->toPlace;
-                        $ewbmaster->toPincode = $value->toPincode;
-                        $ewbmaster->toStateCode = $value->toStateCode;
-                        $ewbmaster->totalValue = $value->totalValue;
-                        $ewbmaster->totInvValue = $value->totInvValue;
-                        $ewbmaster->cgstValue = $value->cgstValue;
-                        $ewbmaster->sgstValue = $value->sgstValue;
-                        $ewbmaster->igstValue = $value->igstValue;
-                        $ewbmaster->cessValue = $value->cessValue;
-                        $ewbmaster->transporterId = $value->transporterId;
-                        $ewbmaster->transporterName = $value->transporterName;
-                        $ewbmaster->status = $value->status;
-                        $ewbmaster->actualDist = $value->actualDist;
-                        $ewbmaster->noValidDays = $value->noValidDays;
-                        $ewbmaster->transitDays = $value->transitDays;
-                        $ewbmaster->remainDist = $value->remainDist;
-                        $ewbmaster->remainDays = $value->remainDays;
-                        $ewbmaster->validUpto = $value->validUpto;
-                        $ewbmaster->extendedTimes = $value->extendedTimes;
-                        $ewbmaster->rejectStatus = $value->rejectStatus;
-                        $ewbmaster->vehicleType = $value->vehicleType;
-                        $ewbmaster->actFromStateCode = $value->actFromStateCode;
-                        $ewbmaster->actToStateCode = $value->actToStateCode;
-                        $ewbmaster->transactionType = $value->transactionType;
-                        $ewbmaster->otherValue = $value->otherValue;
-                        $ewbmaster->cessNonAdvolValue = $value->cessNonAdvolValue;
-                        $ewbmaster->child_updMode = $v->updMode;
-                        $ewbmaster->child_vehicleNo = $v->vehicleNo;
-                        $ewbmaster->child_fromPlace = $v->fromPlace;
-                        $ewbmaster->child_fromState = $v->fromState;
-                        $ewbmaster->child_tripshtNo = $v->tripshtNo;
-                        $ewbmaster->child_userGSTINTransin = $v->userGSTINTransin;
-                        $ewbmaster->child_enteredDate = $enteredDate;
-                        $ewbmaster->child_transMode = $v->transMode;
-                        $ewbmaster->child_transDocNo = $v->transDocNo;
-                        $ewbmaster->child_transDocDate = $transDocDate;
-                        $ewbmaster->child_groupNo = $v->groupNo;
-
-                        $ewbmaster->save();
-
-                    }
+                    $vem->save();
                 }
-            }
-        }
-        else
-        {
-            foreach ($value as $k => $v)
-                $ewaybill->$k = $v;
 
-            $ewaybill->save();
+                // $ewbVehicles = unserialize($value->VehiclListDetails);
+                // if(isset($ewbVehicles[0]) AND ! empty(isset($ewbVehicles[0]))) {
+                //     foreach ($ewbVehicles as $k => $v) {
+
+                //         $ewbmaster = new Ewbmasters();
+                //         $eDate = str_replace("/", "-", $v->enteredDate);
+                //         $enteredDate = date('Y-m-d H:i:s', strtotime($eDate));
+
+                //         $tDocDate = str_replace("/", "-", $v->transDocDate);
+                //         $transDocDate = date('Y-m-d H:i:s', strtotime($tDocDate));
+
+                //         $ewbmaster->ewbId = $ewaybill->id;
+                //         $ewbmaster->ewbNo = $value->ewbNo;
+                //         $ewbmaster->ewayBillDate = $value->ewayBillDate;
+                //         $ewbmaster->genMode = $value->genMode;
+                //         $ewbmaster->userGstin = $value->userGstin;
+                //         $ewbmaster->supplyType = $value->supplyType;
+                //         $ewbmaster->subSupplyType = $value->subSupplyType;
+                //         $ewbmaster->docType = $value->docType;
+                //         $ewbmaster->docNo = $value->docNo;
+                //         $ewbmaster->docDate = $value->docDate;
+                //         $ewbmaster->fromGstin = $value->fromGstin;
+                //         $ewbmaster->fromTrdName = $value->fromTrdName;
+                //         $ewbmaster->fromAddr1 = $value->fromAddr1;
+                //         $ewbmaster->fromAddr2 = $value->fromAddr2;
+                //         $ewbmaster->fromPlace = $value->fromPlace;
+                //         $ewbmaster->fromPincode = $value->fromPincode;
+                //         $ewbmaster->fromStateCode = $value->fromStateCode;
+                //         $ewbmaster->toGstin = $value->toGstin;
+                //         $ewbmaster->toTrdName = $value->toTrdName;
+                //         $ewbmaster->toAddr1 = $value->toAddr1;
+                //         $ewbmaster->toAddr2 = $value->toAddr2;
+                //         $ewbmaster->toPlace = $value->toPlace;
+                //         $ewbmaster->toPincode = $value->toPincode;
+                //         $ewbmaster->toStateCode = $value->toStateCode;
+                //         $ewbmaster->totalValue = $value->totalValue;
+                //         $ewbmaster->totInvValue = $value->totInvValue;
+                //         $ewbmaster->cgstValue = $value->cgstValue;
+                //         $ewbmaster->sgstValue = $value->sgstValue;
+                //         $ewbmaster->igstValue = $value->igstValue;
+                //         $ewbmaster->cessValue = $value->cessValue;
+                //         $ewbmaster->transporterId = $value->transporterId;
+                //         $ewbmaster->transporterName = $value->transporterName;
+                //         $ewbmaster->status = $value->status;
+                //         $ewbmaster->actualDist = $value->actualDist;
+                //         $ewbmaster->noValidDays = $value->noValidDays;
+                //         $ewbmaster->transitDays = $value->transitDays;
+                //         $ewbmaster->remainDist = $value->remainDist;
+                //         $ewbmaster->remainDays = $value->remainDays;
+                //         $ewbmaster->validUpto = $value->validUpto;
+                //         $ewbmaster->extendedTimes = $value->extendedTimes;
+                //         $ewbmaster->rejectStatus = $value->rejectStatus;
+                //         $ewbmaster->vehicleType = $value->vehicleType;
+                //         $ewbmaster->actFromStateCode = $value->actFromStateCode;
+                //         $ewbmaster->actToStateCode = $value->actToStateCode;
+                //         $ewbmaster->transactionType = $value->transactionType;
+                //         $ewbmaster->otherValue = $value->otherValue;
+                //         $ewbmaster->cessNonAdvolValue = $value->cessNonAdvolValue;
+                //         $ewbmaster->child_updMode = $v->updMode;
+                //         $ewbmaster->child_vehicleNo = $v->vehicleNo;
+                //         $ewbmaster->child_fromPlace = $v->fromPlace;
+                //         $ewbmaster->child_fromState = $v->fromState;
+                //         $ewbmaster->child_tripshtNo = $v->tripshtNo;
+                //         $ewbmaster->child_userGSTINTransin = $v->userGSTINTransin;
+                //         $ewbmaster->child_enteredDate = $enteredDate;
+                //         $ewbmaster->child_transMode = $v->transMode;
+                //         $ewbmaster->child_transDocNo = $v->transDocNo;
+                //         $ewbmaster->child_transDocDate = $transDocDate;
+                //         $ewbmaster->child_groupNo = $v->groupNo;
+
+                //         $ewbmaster->save();
+
+                //     }
+                // }
+            }
+
         }
+
+
+
+
+        // else
+        // {
+        //     foreach ($value as $k => $v)
+        //         $ewaybill->$k = $v;
+
+        //     $ewaybill->save();
+        // }
 
         /////////////////////////// UPDATE VEHICLES ////////////////////////////////
         $result = ['code' => $response->getStatusCode(), 'result' => $value];

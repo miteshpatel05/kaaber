@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ewaybill extends Model
+class VehicleEwaybillMaster extends Model
 {
     use HasFactory;
     public $timestamps = false;
 
-    public function ewbList()
-    {
-        return $this->belongsTo(\App\Models\Ewbmasters::class);
+    public function ewaybills(){
+        return $this->belongsTo(ewaybill::class,'eid');
     }
-
 }
-
