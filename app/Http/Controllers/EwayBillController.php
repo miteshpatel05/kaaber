@@ -195,18 +195,22 @@ class EwayBillController extends Controller
                 })
                 ->get();
 
-                if($request->input('customfilter')=="true"){
+                return response()->json([
+                    'vem' => $vem
+                ]);
 
-                    return response()->json([
-                        'vem' => $vem
-                    ]);
-                }
-                else{
+                // if($request->input('customfilter')=="true"){
 
-                    return Datatables::of($vem)
-                    ->addIndexColumn()
-                        ->make(true);
-                }
+                //     return response()->json([
+                //         'vem' => $vem
+                //     ]);
+                // }
+                // else{
+
+                //     return Datatables::of($vem)
+                //     ->addIndexColumn()
+                //         ->make(true);
+                // }
 
             }
             else{

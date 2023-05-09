@@ -631,7 +631,7 @@
     });
 
 
-    function fetch(start_date,end_date,vehicleNo,ewbNo,fromPlace,toPlace,customfilter){
+    function fetch(start_date,end_date,vehicleNo,ewbNo,fromPlace,toPlace){
         // fetch records
         $.ajax({
             url: "{{route('ewb.getEwayBillList')}}",
@@ -643,7 +643,6 @@
                 ewbNo: ewbNo,
                 fromPlace: fromPlace,
                 toPlace: toPlace,
-                customfilter: customfilter,
             },
             dateType: "json",
             success:function(data){
@@ -674,55 +673,54 @@
             }
         });
     }
+    fetch();
+    // $(function() {
+    //         var table = $('.yajra-datatable').DataTable({
+    //             data: {
+    //                 start_date: start_date,
+    //                 end_date: end_date,
+    //                 vehicleNo: vehicleNo,
+    //                 ewbNo: ewbNo,
+    //                 fromPlace: fromPlace,
+    //                 toPlace: toPlace,
+    //             },
+    //             processing: true,
+    //             serverSide: true,
+    //             ajax: "{{ route('ewb.getEwayBillList') }}",
+    //             columns: [{
+    //                 "data": "id",
+    //                     render: function(data, type, row, meta) {
+    //                         $id = (row.id);
+    //                         $html = "<input type='checkbox' id='vemid' name='vemid[]'  value='"+$id+"'>";
+    //                         return $html;
+    //                     }
+    //                 },
+    //                 {
+    //                     data: 'vehicleno',
+    //                     name: 'vehicleno'
+    //                 },
+    //                 {
+    //                     data: 'ewaybills.ewbNo',
+    //                     name: 'ewaybills.ewbNo'
+    //                 },
+    //                 {
+    //                     data: 'ewaybills.ewayBillDate',
+    //                     name: 'ewaybills.ewayBillDate'
+    //                 },
+    //                 {
+    //                     data: 'ewaybills.fromPlace',
+    //                     name: 'ewaybills.fromPlace'
+    //                 },
+    //                 {
+    //                     data: 'ewaybills.toPlace',
+    //                     name: 'ewaybills.toPlace'
+    //                 },
 
-    $(function() {
-            var table = $('.yajra-datatable').DataTable({
-                data: {
-                    start_date: start_date,
-                    end_date: end_date,
-                    vehicleNo: vehicleNo,
-                    ewbNo: ewbNo,
-                    fromPlace: fromPlace,
-                    toPlace: toPlace,
-                },
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('ewb.getEwayBillList') }}",
-                columns: [{
-                    "data": "id",
-                        render: function(data, type, row, meta) {
-                            $id = (row.id);
-                            $html = "<input type='checkbox' id='vemid' name='vemid[]'  value='"+$id+"'>";
-                            return $html;
-                        }
-                    },
-                    {
-                        data: 'vehicleno',
-                        name: 'vehicleno'
-                    },
-                    {
-                        data: 'ewaybills.ewbNo',
-                        name: 'ewaybills.ewbNo'
-                    },
-                    {
-                        data: 'ewaybills.ewayBillDate',
-                        name: 'ewaybills.ewayBillDate'
-                    },
-                    {
-                        data: 'ewaybills.fromPlace',
-                        name: 'ewaybills.fromPlace'
-                    },
-                    {
-                        data: 'ewaybills.toPlace',
-                        name: 'ewaybills.toPlace'
-                    },
+    //             ]
+    //         });
+    //     });
 
-                ]
-            });
-        });
 
-    // fetch();
-    //filter
 //    $(document).on("change",[("#fromPlace","#toPlace","#ewbNo","#vehicleNo")],function(){
 
 //         setTimeout(filterdata,500); //to handle server traffic
@@ -751,8 +749,7 @@
         var ewbNo = $("#ewbNo").val();
         var fromPlace = $("#fromPlace").val();
         var toPlace = $("#toPlace").val();
-        var customfilter = "true";
-        fetch(start_date,end_date,vehicleNo,ewbNo,fromPlace,toPlace,customfilter);
+        fetch(start_date,end_date,vehicleNo,ewbNo,fromPlace,toPlace);
     }
 </script>
 @endsection
