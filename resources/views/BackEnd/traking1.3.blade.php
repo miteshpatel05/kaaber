@@ -66,7 +66,7 @@
                                                             </select>
                                                         </div>
                                                     </div><input type="text" name="search_input[]" value=""
-                                                        class="form-control form-control-sm" id="vehicleNo" onkeyup="filterdata()"/>
+                                                        class="form-control form-control-sm" id="vehicleNo" />
                                                 </div>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
                                                             </select>
                                                         </div>
                                                     </div><input type="text" name="search_input[]" value=""
-                                                        class="form-control form-control-sm" id="ewbNo" onkeyup="filterdata()"/>
+                                                        class="form-control form-control-sm" id="ewbNo" />
                                                 </div>
                                             </div>
                                         </div>
@@ -723,11 +723,11 @@
 
     // fetch();
     //filter
-//    $(document).on("change",[("#fromPlace","#toPlace","#ewbNo","#vehicleNo")],function(){
+   $(document).on("change",[("#fromPlace","#toPlace","#ewbNo","#vehicleNo")],function(){
 
-//         setTimeout(filterdata,500); //to handle server traffic
+        setTimeout(filterdata,500); //to handle server traffic
 
-//     });
+    });
 
     $(document).on("change",["#start_date","#end_date"],function(){
         filterdata();

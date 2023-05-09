@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Library\EwbHelper;
 use Illuminate\Http\Request;
-
+use DataTables;
 use Illuminate\Support\Facades\Http;
 use App\Models\setting;
 use App\Models\ewaybill;
@@ -35,6 +35,8 @@ class EwayBillController extends Controller
     public function index(Request $request)
     {
         $vem = VehicleEwaybillMaster::with(['ewaybills'])->get();
+        // echo "<pre>";
+        // print_r($vem);
         return view('BackEnd.traking', compact('vem'));
 
     }
@@ -144,6 +146,131 @@ class EwayBillController extends Controller
         exit;
     }
 
+    public function getEwayBillList(Request $request){
+
+            if($request->ajax()){
+                $start_date="";
+                $end_date = "";
+                if($request->input('start_date') && $request->input('end_date'))
+                {
+                    $start_date = Carbon::parse($request->input('start_date'));
+                    $end_date = Carbon::parse($request->input('end_date'))->addDay();
+                }
+                $vehicleNo = $request->input('vehicleNo');
+                $ewbNo = $request->input('ewbNo');
+                $fromPlace = $request->input('fromPlace');
+                $toPlace = $request->input('toPlace');
+
+                $vem = VehicleEwaybillMaster::query()
+
+                ->when($start_date,function($query) use($start_date, $end_date){
+                    $query->with('ewaybills')->whereIn('eid',function($query)use($start_date, $end_date){
+                        $query->select('id')->from(with(new Ewaybill)->getTable())
+                        ->whereBetween('ewayBillDate', [$start_date, $end_date])
+                        ;});
+                })
+                ->when($ewbNo,function($query) use($ewbNo){
+                    $query->with('ewaybills')->whereIn('eid',function($query)use($ewbNo){
+                        $query->select('id')->from(with(new Ewaybill)->getTable())
+                        ->where('ewbNo','LIKE','%'.$ewbNo.'%')
+                        ;});
+                })
+                ->when($vehicleNo, function($query)use($vehicleNo){
+                    $query->with('ewaybills')->where('vehicleno','LIKE','%'.$vehicleNo.'%');
+                })
+                ->when($fromPlace,function($query) use($fromPlace){
+                    $query->with('ewaybills')->whereIn('eid',function($query)use($fromPlace){
+                        $query->select('id')->from(with(new Ewaybill)->getTable())
+                        ->where('fromPlace','LIKE','%'.$fromPlace.'%')
+                        ;});
+                })
+                ->when($toPlace,function($query) use($toPlace){
+                    $query->with('ewaybills')->whereIn('eid',function($query)use($toPlace){
+                        $query->select('id')->from(with(new Ewaybill)->getTable())
+                        ->where('toPlace','LIKE','%'.$toPlace.'%')
+                        ;});
+                })
+                ->when(true, function($query){
+                    $query->with('ewaybills')->latest();
+                })
+                ->get();
+
+                if($request->input('customfilter')=="true"){
+
+                    return response()->json([
+                        'vem' => $vem
+                    ]);
+                }
+                else{
+
+                    return Datatables::of($vem)
+                    ->addIndexColumn()
+                        ->make(true);
+                }
+
+            }
+            else{
+                abort(403);
+            }
+    }
+
+    public function getEwayBillDateFilter(Request $request){
+
+        // $s = Carbon::parse($request->start_date)->format('Y-m-d');
+        $e = $request->end_date;
+        $s = $request->post();
+        print_r($s);
+        exit;
+            return response()->json(['html' => $e], 200);
+
+
+        // $data = VehicleEwaybillMaster::with('ewaybills')->whereIn('eid',function($query)use($s,$e){
+        //     $query->select('id')->from(with(new Ewaybill)->getTable())
+        //     ->whereDate('ewayBillDate','>=', '2023-04-01')
+        //     ->whereDate('ewayBillDate','<=' ,'2023-04-20')
+        //     ;})->get();
+
+        // // $data = VehicleEwaybillMaster::with(array('ewaybills' => function ($query)use($request) {
+        // //             $query->whereBetween('ewayBillDate', [$request->start_date, $request->end_date]);
+        // // }))->get();
+
+        // echo "<pre>";
+        // echo $s."<br>".$e;
+        // print_r($data);
+
+        // $data = VehicleEwaybillMaster::with('ewaybills')->whereIn('eid',function($query){
+        //     $query->select('id')->from(with(new Ewaybill)->getTable())
+        //     ->where('ewbNo', '=','551008882487')
+        //     ;})->get();
+
+        // echo "<pre>";
+        // print_r($data);
+
+        if($request->ajax()){
+            $data = VehicleEwaybillMaster::with('ewaybills')->whereIn('eid',function($query)use($s,$e){
+                $query->select('id')->from(with(new Ewaybill)->getTable())
+                ->whereDate('ewayBillDate','>=', $s)
+                ->whereDate('ewayBillDate','<=' ,$e)
+                ;})->get();
+
+            // $data = VehicleEwaybillMaster::with(array('ewaybills' => function ($query)use($request) {
+            //     $query->where('ewbNo', '551008882487');
+            //     }))->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action',function($data){
+
+                    //*** to add button like edit and delete */
+                    $actionBtn= "<input type='checkbox' id='vemid' name='vemid[]' value='$data->id'>";
+                    return $actionBtn;
+
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
     public function AddtoTracking(Request $request)
     {
         $html = "
@@ -235,8 +362,6 @@ class EwayBillController extends Controller
         print_r(unserialize($ewbNo['result']->VehiclListDetails));
         exit;
     }
-
-
 
     /**
      * Get All Statewise Ewaybills Using API.
