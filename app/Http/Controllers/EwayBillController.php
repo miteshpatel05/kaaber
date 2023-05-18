@@ -146,77 +146,129 @@ class EwayBillController extends Controller
         exit;
     }
 
+    // public function getEwayBillList(Request $request){
+
+    //         if($request->ajax()){
+    //             $start_date="";
+    //             $end_date = "";
+    //             if($request->input('start_date') && $request->input('end_date'))
+    //             {
+    //                 $start_date = Carbon::parse($request->input('start_date'));
+    //                 $end_date = Carbon::parse($request->input('end_date'))->addDay();
+    //             }
+    //             $vehicleNo = $request->input('vehicleNo');
+    //             $ewbNo = $request->input('ewbNo');
+    //             $fromPlace = $request->input('fromPlace');
+    //             $toPlace = $request->input('toPlace');
+
+    //             $vem = VehicleEwaybillMaster::query()
+
+    //             ->when($start_date,function($query) use($start_date, $end_date){
+    //                 $query->with('ewaybills')->whereIn('eid',function($query)use($start_date, $end_date){
+    //                     $query->select('id')->from(with(new Ewaybill)->getTable())
+    //                     ->whereBetween('ewayBillDate', [$start_date, $end_date])
+    //                     ;});
+    //             })
+    //             ->when($ewbNo,function($query) use($ewbNo){
+    //                 $query->with('ewaybills')->whereIn('eid',function($query)use($ewbNo){
+    //                     $query->select('id')->from(with(new Ewaybill)->getTable())
+    //                     ->where('ewbNo','LIKE','%'.$ewbNo.'%')
+    //                     ;});
+    //             })
+    //             ->when($vehicleNo, function($query)use($vehicleNo){
+    //                 $query->with('ewaybills')->where('vehicleno','LIKE','%'.$vehicleNo.'%');
+    //             })
+    //             ->when($fromPlace,function($query) use($fromPlace){
+    //                 $query->with('ewaybills')->whereIn('eid',function($query)use($fromPlace){
+    //                     $query->select('id')->from(with(new Ewaybill)->getTable())
+    //                     ->where('fromPlace','LIKE','%'.$fromPlace.'%')
+    //                     ;});
+    //             })
+    //             ->when($toPlace,function($query) use($toPlace){
+    //                 $query->with('ewaybills')->whereIn('eid',function($query)use($toPlace){
+    //                     $query->select('id')->from(with(new Ewaybill)->getTable())
+    //                     ->where('toPlace','LIKE','%'.$toPlace.'%')
+    //                     ;});
+    //             })
+    //             ->when(true, function($query){
+    //                 $query->with('ewaybills')->latest();
+    //             })
+    //             ->get();
+
+    //             return response()->json([
+    //                 'vem' => $vem
+    //             ]);
+
+    //         }
+    //         else{
+    //             abort(403);
+    //         }
+    // }
+
     public function getEwayBillList(Request $request){
 
-            if($request->ajax()){
-                $start_date="";
-                $end_date = "";
-                if($request->input('start_date') && $request->input('end_date'))
-                {
-                    $start_date = Carbon::parse($request->input('start_date'));
-                    $end_date = Carbon::parse($request->input('end_date'))->addDay();
-                }
-                $vehicleNo = $request->input('vehicleNo');
-                $ewbNo = $request->input('ewbNo');
-                $fromPlace = $request->input('fromPlace');
-                $toPlace = $request->input('toPlace');
+        // $data = $request->all;
+        // $data = explode($data,",");
+        // print_r( $data);exit;
 
-                $vem = VehicleEwaybillMaster::query()
+        if($request->ajax()){
 
-                ->when($start_date,function($query) use($start_date, $end_date){
-                    $query->with('ewaybills')->whereIn('eid',function($query)use($start_date, $end_date){
-                        $query->select('id')->from(with(new Ewaybill)->getTable())
-                        ->whereBetween('ewayBillDate', [$start_date, $end_date])
-                        ;});
-                })
-                ->when($ewbNo,function($query) use($ewbNo){
-                    $query->with('ewaybills')->whereIn('eid',function($query)use($ewbNo){
-                        $query->select('id')->from(with(new Ewaybill)->getTable())
-                        ->where('ewbNo','LIKE','%'.$ewbNo.'%')
-                        ;});
-                })
-                ->when($vehicleNo, function($query)use($vehicleNo){
-                    $query->with('ewaybills')->where('vehicleno','LIKE','%'.$vehicleNo.'%');
-                })
-                ->when($fromPlace,function($query) use($fromPlace){
-                    $query->with('ewaybills')->whereIn('eid',function($query)use($fromPlace){
-                        $query->select('id')->from(with(new Ewaybill)->getTable())
-                        ->where('fromPlace','LIKE','%'.$fromPlace.'%')
-                        ;});
-                })
-                ->when($toPlace,function($query) use($toPlace){
-                    $query->with('ewaybills')->whereIn('eid',function($query)use($toPlace){
-                        $query->select('id')->from(with(new Ewaybill)->getTable())
-                        ->where('toPlace','LIKE','%'.$toPlace.'%')
-                        ;});
-                })
-                ->when(true, function($query){
-                    $query->with('ewaybills')->latest();
-                })
-                ->get();
 
-                return response()->json([
-                    'vem' => $vem
-                ]);
-
-                // if($request->input('customfilter')=="true"){
-
-                //     return response()->json([
-                //         'vem' => $vem
-                //     ]);
-                // }
-                // else{
-
-                //     return Datatables::of($vem)
-                //     ->addIndexColumn()
-                //         ->make(true);
-                // }
-
+            $start_date="";
+            $end_date = "";
+            if($request->input('start_date') && $request->input('end_date'))
+            {
+                $start_date = Carbon::parse($request->input('start_date'));
+                $end_date = Carbon::parse($request->input('end_date'))->addDay();
             }
-            else{
-                abort(403);
-            }
-    }
+            $vehicleNo = $request->input('vehicleNo');
+            $ewbNo = $request->input('ewbNo');
+            $fromPlace = $request->input('fromPlace');
+            $toPlace = $request->input('toPlace');
+
+            $vem = VehicleEwaybillMaster::query()
+
+            ->when($start_date,function($query) use($start_date, $end_date){
+                $query->with('ewaybills')->whereIn('eid',function($query)use($start_date, $end_date){
+                    $query->select('id')->from(with(new Ewaybill)->getTable())
+                    ->whereBetween('ewayBillDate', [$start_date, $end_date])
+                    ;});
+            })
+            ->when($ewbNo,function($query) use($ewbNo){
+                $query->with('ewaybills')->whereIn('eid',function($query)use($ewbNo){
+                    $query->select('id')->from(with(new Ewaybill)->getTable())
+                    ->where('ewbNo','LIKE','%'.$ewbNo.'%')
+                    ;});
+            })
+            ->when($vehicleNo, function($query)use($vehicleNo){
+                $query->with('ewaybills')->where('vehicleno','LIKE','%'.$vehicleNo.'%');
+            })
+            ->when($fromPlace,function($query) use($fromPlace){
+                $query->with('ewaybills')->whereIn('eid',function($query)use($fromPlace){
+                    $query->select('id')->from(with(new Ewaybill)->getTable())
+                    ->where('fromPlace','LIKE','%'.$fromPlace.'%')
+                    ;});
+            })
+            ->when($toPlace,function($query) use($toPlace){
+                $query->with('ewaybills')->whereIn('eid',function($query)use($toPlace){
+                    $query->select('id')->from(with(new Ewaybill)->getTable())
+                    ->where('toPlace','LIKE','%'.$toPlace.'%')
+                    ;});
+            })
+            ->when(true, function($query){
+                $query->with('ewaybills')->latest();
+            })
+            ->get();
+
+            return response()->json([
+                'vem' => $vem
+            ]);
+
+        }
+        else{
+            abort(403);
+        }
+}
 
     public function getEwayBillDateFilter(Request $request){
 
@@ -277,28 +329,12 @@ class EwayBillController extends Controller
 
     public function AddtoTracking(Request $request)
     {
-        $html = "
-        <span class='pull-right text-danger'></span>
-        <form id='group-form' >
+        if($request->vemid){
+            $html = "
+            ";
 
-            <div class='table-responsive'>
 
-            <table class='table table-hover mb-0'>
-                <thead>
-                    <tr>
-                        <th>Vehicle No</th>
-                        <th>Eway Bill No</th>
-                        <th>Eway Bill Date</th>
-                        <th>From Place</th>
-                        <th>To Place</th>
-                        <th>LR No</th>
-                        <th>LR Date</th>
-                        <th>Mobile No</th>
-                    </tr>
-                </thead>
-                <tbody>";
-
-            foreach($request->vemid as $id){
+                foreach($request->vemid as $id){
                 $vem = VehicleEwaybillMaster::with(['ewaybills'])->where('id',$id)->first();
                 // echo "<pre>";
                 // print_r($vem);
@@ -309,7 +345,7 @@ class EwayBillController extends Controller
                 $fromplace = $vem->ewaybills->fromPlace;
                 $fromtoplace = $vem->ewaybills->toPlace;
 
-                $html .= "<tr>
+                $html .= "
                 <td>$vehicleno</td>
                 <td>$ewaybill</td>
                 <td>$ewaybilldate</td>
@@ -317,33 +353,33 @@ class EwayBillController extends Controller
                 <td>$fromtoplace</td>
                 <td><input type='text' name='lrno[]' required></td>
                 <td><input type='date' name='lrdate[]' required></td>
-                <td><input type='text' name='mobileno[]' required></td>
-                </tr>";
+                ";
 
-            }
+                }
+
                 $html .= "
-                        </tbody>
-                        </table>
-                        </div>
-                        <div class='modal-footer'>
-                            <button type='submit' id='btngroupsubmit' class='btn btn-primary'>Save Group</button>
-                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
-                        </div>
-                        </form>
 
-        ";
 
-        // echo $html;
-        $message = "";
-        return response()->json(['html' => $html, 'message' => $message], 200);
+                        ";
+
+            // echo $html;
+            $message = "Success";
+            return response()->json(['html' => $html, 'message' => $message], 200);
+        }
+        else{
+            $html = "";
+            $message = "Fail";
+            return response()->json(['html' => $html, 'message' => $message], 200);
+        }
+
     }
 
     public function AddtoGroup(Request $request){
 
-       echo "<pre>";
-       print_r($request->lrno);
-       echo "<br><pre>";
-       print_r($request->lrdate);exit;
+    //    echo "<pre>";
+    //    print_r($request->lrno);
+    //    echo "<br><pre>";
+    //    print_r($request->lrdate);exit;
     }
 
     /**

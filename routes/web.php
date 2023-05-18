@@ -34,17 +34,14 @@ route::post('getLists',[EwayBillController::class,"getLists"])->name('ewb.getLis
 //// EWAYBILL ROUTES
 route::get('ewb',[EwayBillController::class,"index"])->name('ewb');
 route::post('addtotracking',[EwayBillController::class,"AddtoTracking"])->name('ewb.AddtoTracking');
-route::get('getewaybilllist',[EwayBillController::class,"getEwayBillList"])->name('ewb.getEwayBillList');
-
-route::get('AllVehicleEwaybillMasterData',[EwayBillController::class,"AllVehicleEwaybillMasterData"])->name('ewb.AllVehicleEwaybillMasterData');
-
+route::post('getewaybilllist',[EwayBillController::class,"getEwayBillList"])->name('ewb.getEwayBillList');
 route::post('ewb/AddtoGroup',[EwayBillController::class,"AddtoGroup"])->name('ewb.AddtoGroup');
+
+// route::get('AllVehicleEwaybillMasterData',[EwayBillController::class,"AllVehicleEwaybillMasterData"])->name('ewb.AllVehicleEwaybillMasterData');
+
 route::get('ewb/getsingle',[EwayBillController::class,"getSingleEwb"])->name('ewb.getsingle');
 route::get('ewb/group',[EwayBillController::class,"group"])->name('ewb.group');
 route::get('ewb/tracking',[EwayBillController::class,"tracking"])->name('ewb.tracking');
-
-
-Route::get('tempsession', [GlobalSettingsController::class,'tempsession']);
 
 Route::resource('settings', GlobalSettingsController::class);
 

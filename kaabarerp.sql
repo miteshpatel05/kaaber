@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 01, 2023 at 11:06 AM
+-- Generation Time: May 18, 2023 at 11:31 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.1.13
 
@@ -97,14 +97,14 @@ CREATE TABLE IF NOT EXISTS `ewaybills` (
 --
 
 INSERT INTO `ewaybills` (`id`, `ewbGroupId`, `trackingId`, `ewbNo`, `ewayBillDate`, `genMode`, `userGstin`, `supplyType`, `subSupplyType`, `docType`, `docNo`, `docDate`, `fromGstin`, `fromTrdName`, `fromAddr1`, `fromAddr2`, `fromPlace`, `fromPincode`, `fromStateCode`, `toGstin`, `toTrdName`, `toAddr1`, `toAddr2`, `toPlace`, `toPincode`, `toStateCode`, `totalValue`, `totInvValue`, `cgstValue`, `sgstValue`, `igstValue`, `cessValue`, `transporterId`, `transporterName`, `status`, `actualDist`, `noValidDays`, `transitDist`, `transitDays`, `remainDist`, `remainDays`, `validUpto`, `extendedTimes`, `rejectStatus`, `vehicleType`, `actFromStateCode`, `actToStateCode`, `transactionType`, `otherValue`, `cessNonAdvolValue`, `VehiclListDetails`, `itemList`, `ownStatus`, `created_at`, `created_by`, `updated_at`, `updated_by`, `isDeleted`, `deleted_at`, `deleted_by`) VALUES
-(1, NULL, NULL, 551008882487, '2023-04-20 17:27:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-7', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '1000.00', '1120.00', '0.00', '0.00', '120.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:27:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:1000;}}', 'Pending', '2023-04-29 10:57:26', 9999, '2023-04-29 10:57:26', 1, 'No', '2023-04-29 10:57:26', 1),
-(2, NULL, NULL, 581008882486, '2023-04-20 17:26:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-6', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '1000.00', '1120.00', '0.00', '0.00', '120.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:26:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:1000;}}', 'Pending', '2023-04-29 10:57:27', 9999, '2023-04-29 10:57:27', 1, 'No', '2023-04-29 10:57:27', 1),
+(1, NULL, NULL, 551008882487, '2023-04-21 17:27:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-7', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '1000.00', '1120.00', '0.00', '0.00', '120.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:27:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:1000;}}', 'Pending', '2023-04-29 10:57:26', 9999, '2023-05-06 09:49:57', 1, 'No', '2023-05-06 09:49:57', 1),
+(2, NULL, NULL, 581008882486, '2023-04-21 17:26:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-6', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '1000.00', '1120.00', '0.00', '0.00', '120.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:26:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:1000;}}', 'Pending', '2023-04-29 10:57:27', 9999, '2023-05-07 08:48:24', 1, 'No', '2023-05-07 08:48:24', 1),
 (3, NULL, NULL, 511008882485, '2023-04-20 17:25:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-5', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '1000.00', '1120.00', '0.00', '0.00', '120.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:25:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:1000;}}', 'Pending', '2023-04-29 10:57:28', 9999, '2023-04-29 10:57:28', 1, 'No', '2023-04-29 10:57:28', 1),
 (4, NULL, NULL, 541008882484, '2023-04-20 17:23:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-4', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '1000.00', '1120.00', '0.00', '0.00', '120.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:23:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:1000;}}', 'Pending', '2023-04-29 10:57:29', 9999, '2023-04-29 10:57:29', 1, 'No', '2023-04-29 10:57:29', 1),
 (5, NULL, NULL, 571008882483, '2023-04-20 17:06:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-3', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '1000.00', '1120.00', '0.00', '0.00', '120.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:06:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:1000;}}', 'Pending', '2023-04-29 10:57:32', 9999, '2023-04-29 10:57:32', 1, 'No', '2023-04-29 10:57:32', 1),
 (6, NULL, NULL, 501008882482, '2023-04-20 17:05:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-2', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '10000.00', '11200.00', '0.00', '0.00', '1200.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:05:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:10000;}}', 'Pending', '2023-04-29 10:57:33', 9999, '2023-04-29 10:57:33', 1, 'No', '2023-04-29 10:57:33', 1),
 (7, NULL, NULL, 531008882481, '2023-04-20 17:03:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'INV-1', '2023-04-20 00:00:00', '34AACCC1596Q002', 'TATA CONSULTANCY SERVICES LIMITED', 'PlotNo.23', 'Gali no.8', 'Gali no.8', 605001, '34', '18AABCU9603R1ZM', 'I Best MultiWork Company', 'PlotNo.23', 'Gali no.8', 'Assam', 781127, '18', '10000.00', '11200.00', '0.00', '0.00', '1200.00', '0.00', '', '', 'ACT', 2812, 15, NULL, 0, 0, 0, '2023-05-05 23:59:00', 0, 'N', 'R', '34', '18', 'Combination-of-2-and-3', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:9:\"Gali no.8\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 05:03:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:2:\"12\";s:12:\"transDocDate\";N;s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:6:\"Laptop\";s:11:\"productDesc\";s:6:\"Laptop\";s:7:\"hsnCode\";i:8471;s:8:\"quantity\";d:100;s:7:\"qtyUnit\";s:3:\"BAL\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:12;s:8:\"cessRate\";i:0;s:12:\"cessNonAdvol\";i:0;s:13:\"taxableAmount\";d:10000;}}', 'Pending', '2023-04-29 10:57:34', 9999, '2023-04-29 10:57:34', 1, 'No', '2023-04-29 10:57:34', 1),
-(8, NULL, NULL, 551008882474, '2023-04-20 15:40:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'PPT/10', '2023-04-20 00:00:00', '34AACCC1596Q002', 'VIDHI AGRRITECH', 'INDUSTRIAL ESTATE 001 RICCO AREA,              SUMERPUR-306902 DIST.PALI (306902)', '', ' SUMERPUR', 605001, '34', '08ADUPA8441N1ZX', 'MANGILAL MAKHAN LAL', 'MAIN BAZAR, SUMERPUR, Rajasthan, 306902', '', 'SUMERPUR', 306902, '8', '2240.00', '2352.00', '0.00', '0.00', '112.00', '0.00', '', 'ASHAPURA ROADWAYS ', 'ACT', 2133, 11, NULL, 0, 0, 0, '2023-05-01 23:59:00', 0, 'N', 'R', '34', '8', 'Regular', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:10:\"RJ22SL1450\";s:9:\"fromPlace\";s:9:\" SUMERPUR\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 03:40:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:0:\"\";s:12:\"transDocDate\";s:10:\"20/04/2023\";s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:0:\"\";s:11:\"productDesc\";s:20:\"SARSON FACTORY THOK \";s:7:\"hsnCode\";i:120750;s:8:\"quantity\";d:20;s:7:\"qtyUnit\";s:3:\"KGS\";s:8:\"cgstRate\";i:0;s:8:\"sgstRate\";i:0;s:8:\"igstRate\";d:5;s:8:\"cessRate\";d:0;s:12:\"cessNonAdvol\";d:0;s:13:\"taxableAmount\";d:2240;}}', 'Pending', '2023-04-29 10:57:35', 9999, '2023-04-29 10:57:35', 1, 'No', '2023-04-29 10:57:35', 1),
+(8, NULL, NULL, 551008882474, '2023-04-21 15:40:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'PPT/10', '2023-04-20 00:00:00', '34AACCC1596Q002', 'VIDHI AGRRITECH', 'INDUSTRIAL ESTATE 001 RICCO AREA,              SUMERPUR-306902 DIST.PALI (306902)', '', ' SUMERPUR', 605001, '34', '08ADUPA8441N1ZX', 'MANGILAL MAKHAN LAL', 'MAIN BAZAR, SUMERPUR, Rajasthan, 306902', '', 'SUMERPUR', 306902, '8', '2240.00', '2352.00', '0.00', '0.00', '112.00', '0.00', '', 'ASHAPURA ROADWAYS ', 'ACT', 2133, 11, NULL, 0, 0, 0, '2023-05-01 23:59:00', 0, 'N', 'R', '34', '8', 'Regular', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:10:\"RJ22SL1450\";s:9:\"fromPlace\";s:9:\" SUMERPUR\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 03:40:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:0:\"\";s:12:\"transDocDate\";s:10:\"20/04/2023\";s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:0:\"\";s:11:\"productDesc\";s:20:\"SARSON FACTORY THOK \";s:7:\"hsnCode\";i:120750;s:8:\"quantity\";d:20;s:7:\"qtyUnit\";s:3:\"KGS\";s:8:\"cgstRate\";i:0;s:8:\"sgstRate\";i:0;s:8:\"igstRate\";d:5;s:8:\"cessRate\";d:0;s:12:\"cessNonAdvol\";d:0;s:13:\"taxableAmount\";d:2240;}}', 'Pending', '2023-04-29 10:57:35', 9999, '2023-05-07 08:29:23', 1, 'No', '2023-05-07 08:29:23', 1),
 (9, NULL, NULL, 581008882473, '2023-04-20 15:31:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'AB-5', '2023-04-20 00:00:00', '34AACCC1596Q002', 'NIC COMPANY PVT LTD', 'I22222, THE SURAT CENTER MARKET RING AA,', 'MARINE LINE AREA, NR KAPODRA NEAR AREA, JAY NANARAYAN INDUSTIRES BHEING DOADSF, THE NEW SURAT TEXTIL', 'SURAT - 395023', 605001, '34', '29AWGPV7107B1Z1', 'XYZ COMPANY PVT LTD', '7TH BLOCK, KUVEMPU LAYOUT,', '7TH BLOCK, KUVEMPU LAYOUT,', 'RAMNAGARAM', 562160, '29', '107625.00', '113006.00', '0.00', '0.00', '5381.25', '0.00', '', '148 STM PARKING', 'ACT', 362, 2, NULL, 0, 0, 0, '2023-04-22 23:59:00', 0, 'N', 'R', '34', '29', 'Regular', '0.00', '0.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:10:\"GJ05GC9999\";s:9:\"fromPlace\";s:14:\"SURAT - 395023\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 03:31:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:0:\"\";s:12:\"transDocDate\";s:10:\"20/04/2023\";s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:0:\"\";s:11:\"productDesc\";s:0:\"\";s:7:\"hsnCode\";i:540754;s:8:\"quantity\";d:123;s:7:\"qtyUnit\";s:3:\"PCS\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:5;s:8:\"cessRate\";d:0;s:12:\"cessNonAdvol\";d:0;s:13:\"taxableAmount\";d:107625;}}', 'Pending', '2023-04-29 10:57:36', 9999, '2023-04-29 10:57:36', 1, 'No', '2023-04-29 10:57:36', 1),
 (10, NULL, NULL, 541008882471, '2023-04-20 15:14:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'IFOXDV51', '2023-04-20 00:00:00', '34AACCC1596Q002', 'Neelkamal test', '364, Villianur Main Rd, Nellithope', 'Kuyavarpalayam, Puducherry', 'Kuyavarpalayam', 605005, '34', 'URP            ', 'Ujjivan Small Finance Bank Limited', 'Khampur Raya Village Shadi Kampur Plot No. 2364 / 8', 'Khampur Raya Village Shadi Kampur', 'New Delhi', 110008, '7', '2050.00', '2419.00', '0.00', '0.00', '369.00', '0.00', '05AAABC0181E1ZE', 'Logistar', 'ACT', 2350, 12, NULL, 0, 0, 0, '1970-01-01 00:00:00', 0, 'N', '', '34', '7', 'Regular', '0.00', '0.00', 'a:0:{}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:9:\"A1 Trolly\";s:11:\"productDesc\";s:3:\"ANY\";s:7:\"hsnCode\";i:2515;s:8:\"quantity\";d:1;s:7:\"qtyUnit\";s:3:\"OTH\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:18;s:8:\"cessRate\";d:0;s:12:\"cessNonAdvol\";d:0;s:13:\"taxableAmount\";d:2050;}}', 'Pending', '2023-04-29 10:57:38', 9999, '2023-04-29 10:57:38', 1, 'No', '2023-04-29 10:57:38', 1),
 (11, NULL, NULL, 501008882466, '2023-04-20 14:44:00', 'API', '34AACCC1596Q002', 'O', 'Supply', 'INV', 'AV/G/2223/0002', '2023-04-20 00:00:00', '34AACCC1596Q002', 'welton', '4-9-35, GROUND,1ST, 2ND FLOOR, AURANGPURA', 'GROUND FLOOR OSBORNE ROAD', 'FRAZER TOWN', 605001, '34', '29AWGPV7107B1Z1', 'sthuthya', 'GODOWN NO 5 GAT NO 1214/1230', '', 'Beml Nagar', 562160, '29', '5609889.00', '5778485.67', '0.00', '0.00', '168296.67', '0.00', '', '', 'ACT', 362, 2, NULL, 0, 0, 0, '2023-04-22 23:59:00', 0, 'N', 'R', '34', '29', 'Combination-of-2-and-3', '-100.00', '400.00', 'a:1:{i:0;O:8:\"stdClass\":11:{s:7:\"updMode\";s:3:\"API\";s:9:\"vehicleNo\";s:7:\"PVC1234\";s:9:\"fromPlace\";s:11:\"FRAZER TOWN\";s:9:\"fromState\";i:34;s:9:\"tripshtNo\";i:0;s:16:\"userGSTINTransin\";s:15:\"34AACCC1596Q002\";s:11:\"enteredDate\";s:22:\"20/04/2023 02:44:00 PM\";s:9:\"transMode\";s:1:\"1\";s:10:\"transDocNo\";s:7:\"DOC/125\";s:12:\"transDocDate\";s:10:\"20/04/2023\";s:7:\"groupNo\";s:1:\"0\";}}', 'a:1:{i:0;O:8:\"stdClass\":13:{s:6:\"itemNo\";i:1;s:9:\"productId\";i:0;s:11:\"productName\";s:8:\"BLAZER-1\";s:11:\"productDesc\";s:8:\"BLAZER-1\";s:7:\"hsnCode\";i:4421;s:8:\"quantity\";d:25;s:7:\"qtyUnit\";s:3:\"NOS\";s:8:\"cgstRate\";d:0;s:8:\"sgstRate\";d:0;s:8:\"igstRate\";d:3;s:8:\"cessRate\";d:3;s:12:\"cessNonAdvol\";d:0;s:13:\"taxableAmount\";d:5609889;}}', 'Pending', '2023-04-29 10:57:39', 9999, '2023-04-29 10:57:39', 1, 'No', '2023-04-29 10:57:39', 1),
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=140 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -296,7 +296,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (135, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (136, '2023_04_29_054032_create_vehicles_table', 1),
 (137, '2023_04_29_070255_create_vehicle_ewaybill_masters_table', 1),
-(138, '2023_04_29_071732_ewaybill', 1);
+(138, '2023_04_29_071732_ewaybill', 1),
+(139, '2023_05_18_095802_create_vewbgroups_table', 2);
 
 -- --------------------------------------------------------
 
@@ -676,34 +677,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicles`
---
-
-DROP TABLE IF EXISTS `vehicles`;
-CREATE TABLE IF NOT EXISTS `vehicles` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `vehicleno` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-
---
--- Dumping data for table `vehicles`
---
-
-INSERT INTO `vehicles` (`id`, `vehicleno`, `created_at`, `updated_at`) VALUES
-(1, 'PVC1234', NULL, NULL),
-(2, 'RJ22SL1450', NULL, NULL),
-(3, 'GJ05GC9999', NULL, NULL),
-(4, 'MH125454', NULL, NULL),
-(5, 'GJ27X7664', NULL, NULL),
-(6, 'GJ00ZZ1001', NULL, NULL),
-(7, 'MH09AB1234', NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `vehicle_ewaybill_masters`
 --
 
@@ -722,6 +695,7 @@ CREATE TABLE IF NOT EXISTS `vehicle_ewaybill_masters` (
   `transDocNo` text COLLATE utf8mb3_unicode_ci,
   `transDocDate` date NOT NULL,
   `groupNo` int NOT NULL,
+  `isgroup` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -733,22 +707,41 @@ CREATE TABLE IF NOT EXISTS `vehicle_ewaybill_masters` (
 -- Dumping data for table `vehicle_ewaybill_masters`
 --
 
-INSERT INTO `vehicle_ewaybill_masters` (`id`, `vehicleno`, `eid`, `updMode`, `fromPlace`, `fromState`, `tripshtNo`, `userGSTINTransin`, `enteredDate`, `transMode`, `transDocNo`, `transDocDate`, `groupNo`, `created_at`, `updated_at`) VALUES
-(1, 'PVC1234', 1, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, NULL, NULL),
-(2, 'PVC1234', 2, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, NULL, NULL),
-(3, 'PVC1234', 3, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, NULL, NULL),
-(4, 'PVC1234', 4, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, NULL, NULL),
-(5, 'PVC1234', 5, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, NULL, NULL),
-(6, 'PVC1234', 6, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, NULL, NULL),
-(7, 'PVC1234', 7, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, NULL, NULL),
-(8, 'RJ22SL1450', 8, 'API', ' SUMERPUR', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '', '2023-04-20', 0, NULL, NULL),
-(9, 'GJ05GC9999', 9, 'API', 'SURAT - 395023', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '', '2023-04-20', 0, NULL, NULL),
-(10, 'PVC1234', 11, 'API', 'FRAZER TOWN', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, 'DOC/125', '2023-04-20', 0, NULL, NULL),
-(11, 'MH125454', 12, 'API', 'FRAZER TOWN', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, 'A12', '2022-03-02', 0, NULL, NULL),
-(12, 'GJ27X7664', 13, 'API', 'AHMEDABAD', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '', '1970-01-01', 0, NULL, NULL),
-(13, 'GJ00ZZ1001', 14, 'API', 'ahmedabad', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '2112155454545', '2023-04-20', 0, NULL, NULL),
-(14, 'GJ00ZZ1001', 15, 'API', 'ahmedabad', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '2112155454545', '2023-04-20', 0, NULL, NULL),
-(15, 'MH09AB1234', 16, 'API', 'Maharashtra', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '', '2023-04-20', 0, NULL, NULL);
+INSERT INTO `vehicle_ewaybill_masters` (`id`, `vehicleno`, `eid`, `updMode`, `fromPlace`, `fromState`, `tripshtNo`, `userGSTINTransin`, `enteredDate`, `transMode`, `transDocNo`, `transDocDate`, `groupNo`, `isgroup`, `created_at`, `updated_at`) VALUES
+(1, 'PVC1234', 1, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, 0, NULL, NULL),
+(2, 'PVC1234', 2, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, 0, NULL, NULL),
+(3, 'PVC1234', 3, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, 0, NULL, NULL),
+(4, 'PVC1234', 4, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, 0, NULL, NULL),
+(5, 'PVC1234', 5, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, 0, NULL, NULL),
+(6, 'PVC1234', 6, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, 0, NULL, NULL),
+(7, 'PVC1234', 7, 'API', 'Gali no.8', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '12', '1970-01-01', 0, 0, NULL, NULL),
+(8, 'RJ22SL1450', 8, 'API', ' SUMERPUR', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '', '2023-04-20', 0, 0, NULL, NULL),
+(9, 'GJ05GC9999', 9, 'API', 'SURAT - 395023', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '', '2023-04-20', 0, 0, NULL, NULL),
+(10, 'PVC1234', 11, 'API', 'FRAZER TOWN', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, 'DOC/125', '2023-04-20', 0, 0, NULL, NULL),
+(11, 'MH125454', 12, 'API', 'FRAZER TOWN', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, 'A12', '2022-03-02', 0, 0, NULL, NULL),
+(12, 'GJ27X7664', 13, 'API', 'AHMEDABAD', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '', '1970-01-01', 0, 0, NULL, NULL),
+(13, 'GJ00ZZ1001', 14, 'API', 'ahmedabad', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '2112155454545', '2023-04-20', 0, 0, NULL, NULL),
+(14, 'GJ00ZZ1001', 15, 'API', 'ahmedabad', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '2112155454545', '2023-04-20', 0, 0, NULL, NULL),
+(15, 'MH09AB1234', 16, 'API', 'Maharashtra', 34, 0, '34AACCC1596Q002', '2023-04-20', 1, '', '2023-04-20', 0, 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vewbgroups`
+--
+
+DROP TABLE IF EXISTS `vewbgroups`;
+CREATE TABLE IF NOT EXISTS `vewbgroups` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `vewbid` int NOT NULL,
+  `userid` int NOT NULL,
+  `drivermobileno` double NOT NULL,
+  `irno` int NOT NULL,
+  `irdate` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Constraints for dumped tables

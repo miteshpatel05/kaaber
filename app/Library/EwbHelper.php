@@ -4,7 +4,6 @@ namespace App\Library;
 use App\Models\Ewaybill;
 use App\Models\Ewbmasters;
 use App\Models\Setting;
-use App\Models\vehicle;
 use App\Models\VehicleEwaybillMaster;
 use Illuminate\Support\Facades\Http;
 

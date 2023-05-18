@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('transDocNo');
             $table->date('transDocDate');
             $table->integer('groupNo');
+            $table->boolean('isgroup');
             $table->timestamps();
         });
     }
