@@ -13,19 +13,11 @@ return new class extends Migration
     {
         Schema::create('vehicle_ewaybill_masters', function (Blueprint $table) {
             $table->id();
-            $table->string('vehicleno');
+            $table->integer('vid'); //foreign key of vehicle table.
             $table->integer('eid'); //foreign key of ewaybills table.
-            $table->integer('updMode');
-            $table->string('fromPlace');
-            $table->integer('fromState');
-            $table->integer('tripshtNo');
-            $table->string('userGSTINTransin');
-            $table->date('enteredDate');
-            $table->integer('transMode');
-            $table->integer('transDocNo');
-            $table->date('transDocDate');
-            $table->integer('groupNo');
-            $table->boolean('isgroup');
+            $table->integer('user_id')->nullable(); //foreign key of ewaybills table.
+            $table->integer('lrno')->nullable();
+            $table->date('lrdate')->nullable();
             $table->timestamps();
         });
     }

@@ -18,6 +18,9 @@
         <!-- App Css-->
         <link href="{{url('theme').'/assets/css/app.min.css'}}" id="app-style" rel="stylesheet" type="text/css" />
         <script src="{{url('theme').'/assets/libs/jquery/jquery.min.js'}}"></script>
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     </head>
 
     <body data-topbar="dark" data-layout="horizontal">

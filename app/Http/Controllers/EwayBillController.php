@@ -8,8 +8,11 @@ use DataTables;
 use Illuminate\Support\Facades\Http;
 use App\Models\setting;
 use App\Models\ewaybill;
+use App\Models\vehicle;
 use App\Models\VehicleEwaybillMaster;
+use App\Models\vewbgroup;
 use SebastianBergmann\Type\TrueType;
+use Illuminate\Support\Facades\Auth;
 
 class EwayBillController extends Controller
 {
@@ -34,10 +37,7 @@ class EwayBillController extends Controller
      */
     public function index(Request $request)
     {
-        $vem = VehicleEwaybillMaster::with(['ewaybills'])->get();
-        // echo "<pre>";
-        // print_r($vem);
-        return view('BackEnd.traking', compact('vem'));
+        return view('BackEnd.ewaybilllist');
 
     }
 
@@ -229,36 +229,40 @@ class EwayBillController extends Controller
             $vem = VehicleEwaybillMaster::query()
 
             ->when($start_date,function($query) use($start_date, $end_date){
-                $query->with('ewaybills')->whereIn('eid',function($query)use($start_date, $end_date){
+                $query->with(['vehicles','ewaybills'])->whereIn('eid',function($query)use($start_date, $end_date){
                     $query->select('id')->from(with(new Ewaybill)->getTable())
                     ->whereBetween('ewayBillDate', [$start_date, $end_date])
                     ;});
             })
             ->when($ewbNo,function($query) use($ewbNo){
-                $query->with('ewaybills')->whereIn('eid',function($query)use($ewbNo){
+                $query->with(['vehicles','ewaybills'])->whereIn('eid',function($query)use($ewbNo){
                     $query->select('id')->from(with(new Ewaybill)->getTable())
                     ->where('ewbNo','LIKE','%'.$ewbNo.'%')
                     ;});
             })
             ->when($vehicleNo, function($query)use($vehicleNo){
-                $query->with('ewaybills')->where('vehicleno','LIKE','%'.$vehicleNo.'%');
+                $query->with(['vehicles','ewaybills'])->whereIn('vid',function($query)use($vehicleNo){
+                    $query->select('id')->from(with(new vehicle)->getTable())
+                    ->where('vehicleno','LIKE','%'.$vehicleNo.'%')
+                    ;});
             })
             ->when($fromPlace,function($query) use($fromPlace){
-                $query->with('ewaybills')->whereIn('eid',function($query)use($fromPlace){
+                $query->with(['vehicles','ewaybills'])->whereIn('eid',function($query)use($fromPlace){
                     $query->select('id')->from(with(new Ewaybill)->getTable())
                     ->where('fromPlace','LIKE','%'.$fromPlace.'%')
                     ;});
             })
             ->when($toPlace,function($query) use($toPlace){
-                $query->with('ewaybills')->whereIn('eid',function($query)use($toPlace){
+                $query->with(['vehicles','ewaybills'])->whereIn('eid',function($query)use($toPlace){
                     $query->select('id')->from(with(new Ewaybill)->getTable())
                     ->where('toPlace','LIKE','%'.$toPlace.'%')
                     ;});
             })
             ->when(true, function($query){
-                $query->with('ewaybills')->latest();
+                $query->with(['vehicles','ewaybills'])->latest();
             })
-            ->get();
+            ->where('user_id',null)
+            ->orderBy('vid')->get();
 
             return response()->json([
                 'vem' => $vem
@@ -268,7 +272,7 @@ class EwayBillController extends Controller
         else{
             abort(403);
         }
-}
+    }
 
     public function getEwayBillDateFilter(Request $request){
 
@@ -327,40 +331,32 @@ class EwayBillController extends Controller
         }
     }
 
-    public function AddtoTracking(Request $request)
+    public function AddtoGroup(Request $request)
     {
+        $html="";
         if($request->vemid){
-            $html = "
-            ";
-
-
                 foreach($request->vemid as $id){
-                $vem = VehicleEwaybillMaster::with(['ewaybills'])->where('id',$id)->first();
-                // echo "<pre>";
-                // print_r($vem);
-                // echo "<br>";
-                $vehicleno =  $vem->vehicleno;
-                $ewaybill = $vem->ewaybills->ewbNo;
-                $ewaybilldate = $vem->ewaybills->ewayBillDate;
-                $fromplace = $vem->ewaybills->fromPlace;
-                $fromtoplace = $vem->ewaybills->toPlace;
+                    $vem = VehicleEwaybillMaster::with(['ewaybills'])->where('id',$id)->first();
+                    // echo "<pre>";
+                    // print_r($vem);
+                    // echo "<br>";
+                    $vehicleno =  $vem->vehicles->vehicleno;
+                    $ewaybill = $vem->ewaybills->ewbNo;
+                    $ewaybilldate = $vem->ewaybills->ewayBillDate;
+                    $fromplace = $vem->ewaybills->fromPlace;
+                    $fromtoplace = $vem->ewaybills->toPlace;
 
-                $html .= "
-                <td>$vehicleno</td>
-                <td>$ewaybill</td>
-                <td>$ewaybilldate</td>
-                <td>$fromplace</td>
-                <td>$fromtoplace</td>
-                <td><input type='text' name='lrno[]' required></td>
-                <td><input type='date' name='lrdate[]' required></td>
-                ";
-
+                    $html .= "<tr>
+                    <td>$vehicleno</td>
+                    <td>$ewaybill</td>
+                    <td>$ewaybilldate</td>
+                    <td>$fromplace</td>
+                    <td>$fromtoplace</td>
+                    <td><input type='hidden' name='id[]' value='$id'>
+                    <input type='text' name='lrno[]' required></td>
+                    <td><input type='date' name='lrdate[]' required></td>
+                    </tr>";
                 }
-
-                $html .= "
-
-
-                        ";
 
             // echo $html;
             $message = "Success";
@@ -374,12 +370,32 @@ class EwayBillController extends Controller
 
     }
 
-    public function AddtoGroup(Request $request){
+    public function SaveGroup(Request $request){
 
-    //    echo "<pre>";
-    //    print_r($request->lrno);
-    //    echo "<br><pre>";
-    //    print_r($request->lrdate);exit;
+        for($i=0;$i<count($request->input('id'));$i++){
+
+            $id = $request->id[$i];
+
+            $vehicle = vehicle::where('id',function($query)use($id){
+                $query->select('vid')->from(with(new VehicleEwaybillMaster())->getTable())
+                ->where('id',$id);
+            })->first();
+
+            $vehicle->mobile = $request->drivermobileno;
+            $vehicle->user_id = Auth::id();
+            $vehicle->groupdate = Carbon::now();
+            $vehicle->save();
+
+            // $vid = VehicleEwaybillMaster::select('vid')->where('id',$id)->first();
+            // $vem = VehicleEwaybillMaster::where('vid',$vid->vid)->update(['user_id' => Auth::id()]);
+
+            $vem = VehicleEwaybillMaster::where('id',$id)->first();
+            $vem->user_id = Auth::id();
+            $vem->lrno = $request->lrno[$i];
+            $vem->lrdate = $request->lrdate[$i];
+            $vem->save();
+
+        }
     }
 
     /**
@@ -390,17 +406,17 @@ class EwayBillController extends Controller
     public function getSingleEwb()
     {
 
-        $ewbs = $this->ewb->getEwbByDate(date('20/m/Y'));
+        $ewbs = $this->ewb->getEwbByDate(date('15/m/Y'));
 
         foreach ($ewbs as $key => $value) {
             $this->ewb->getEwb($value->ewbNo);
         }
-        echo 'sucess';
-        exit;
+        echo 'successfully data downloaded...';
 
-        echo '<pre>';
-        print_r(unserialize($ewbNo['result']->VehiclListDetails));
-        exit;
+
+        // echo '<pre>';
+        // print_r(unserialize($ewbNo['result']->VehiclListDetails));
+        // exit;
     }
 
     /**

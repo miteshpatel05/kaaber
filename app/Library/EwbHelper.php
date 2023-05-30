@@ -4,6 +4,7 @@ namespace App\Library;
 use App\Models\Ewaybill;
 use App\Models\Ewbmasters;
 use App\Models\Setting;
+use App\Models\vehicle;
 use App\Models\VehicleEwaybillMaster;
 use Illuminate\Support\Facades\Http;
 
@@ -54,10 +55,10 @@ class EwbHelper{
         $response = Http::get($url);
         $data = json_decode($response->body());
 
-        if($data->status)
-            return $data->authtoken;
-        else
-            return false;
+        // if($data->status)
+        //     return $data->authtoken;
+        // else
+        //     return false;
     }
 
     public function getEwbByDate($date) {
@@ -96,9 +97,9 @@ class EwbHelper{
         $response = Http::get($url);
         $value = json_decode($response->body());
 
-        echo "<pre>";
-        print_r($value);
-        // exit;
+        // echo "<pre>";
+        // print_r($value);
+
 
         $ewayBillDate = str_replace("/", "-", $value->ewayBillDate);
         $docDate = str_replace("/", "-", $value->docDate);
@@ -124,32 +125,47 @@ class EwbHelper{
 
             if($ewaybill->save()) {
 
+
+                //save vehicle details
                 $ewbVehicles = unserialize($value->VehiclListDetails);
                 foreach ($ewbVehicles as $k => $v) {
 
-                    $vem = new VehicleEwaybillMaster();
-
-                    $ewaybillid = $ewaybill->id;
-
                     $eDate = str_replace("/", "-", $v->enteredDate);
-                    $enteredDate = date('Y-m-d H:i:s', strtotime($eDate));
+                    $enteredDate = date('Y-m-d', strtotime($eDate));
                     $tDocDate = str_replace("/", "-", $v->transDocDate);
                     $transDocDate = date('Y-m-d H:i:s', strtotime($tDocDate));
 
-                    $vem->vehicleno = $v->vehicleNo;
-                    $vem->eid = $ewaybillid;
-                    $vem->updMode = $v->updMode;
-                    $vem->fromPlace = $v->fromPlace;
-                    $vem->fromState = $v->fromState;
-                    $vem->tripshtNo = $v->tripshtNo;
-                    $vem->userGSTINTransin = $v->userGSTINTransin;
-                    $vem->enteredDate = $enteredDate;
-                    $vem->transMode = $v->transMode;
-                    $vem->transDocNo = $v->transDocNo;
-                    $vem->transDocDate = $transDocDate;
-                    $vem->groupNo = $v->groupNo;
+                    if(vehicle::where('vehicleno',$v->vehicleNo)
+                    ->where('enteredDate',$enteredDate)->count() < 1){
+                        $veh = new vehicle();
+                        $veh->vehicleno = $v->vehicleNo;
+                        $veh->updMode = $v->updMode;
+                        $veh->fromPlace = $v->fromPlace;
+                        $veh->fromState = $v->fromState;
+                        $veh->tripshtNo = $v->tripshtNo;
+                        $veh->userGSTINTransin = $v->userGSTINTransin;
+                        $veh->enteredDate = $enteredDate;
+                        $veh->transMode = $v->transMode;
+                        $veh->transDocNo = $v->transDocNo;
+                        $veh->transDocDate = $transDocDate;
+                        $veh->groupNo = $v->groupNo;
 
-                    $vem->save();
+                        $veh->save();
+                        $vem = new VehicleEwaybillMaster();
+                        $vem->vid = $veh->id;
+                        $vem->eid = $ewaybill->id;
+                        $vem->save();
+
+                    }
+                    else{
+                        $vehicle = vehicle::where('vehicleno',$v->vehicleNo)
+                                        ->where('enteredDate',$enteredDate)->first();
+                        $vem = new VehicleEwaybillMaster();
+                        $vem->vid = $vehicle->id;
+                        $vem->eid = $ewaybill->id;
+                        $vem->save();
+                    }
+
                 }
 
                 // $ewbVehicles = unserialize($value->VehiclListDetails);

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vewbgroups', function (Blueprint $table) {
+        Schema::create('trackings', function (Blueprint $table) {
             $table->id();
-            $table->integer("vewbid");
-            $table->integer("user_id");
-            $table->double("drivermobileno");
-            $table->integer("irno");
-            $table->date("irdate");
+            $table->integer('vid');
+            $table->integer('pincode');
+            $table->string('location');
+            $table->string('status')->nullable();
+            $table->date('trackingdate');
+            $table->longText('remark')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vewbgroups');
+        Schema::dropIfExists('trackings');
     }
 };

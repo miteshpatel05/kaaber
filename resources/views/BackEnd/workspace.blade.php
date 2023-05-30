@@ -6,14 +6,26 @@
     </script>
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <!-- Responsive Table js -->
+    <script src="{{url('theme').'/assets/libs/admin-resources/rwd-table/rwd-table.min.js'}}"></script>
+
 
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <div class="card-body">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+                          <li class="breadcrumb-item"><a href="{{route('ewb')}}">Eway Bill List</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Group Eway Bill</li>
+                        </ol>
+                      </nav>
+
                     <div class="card row ">
+
                         <h4 class="card-header bg-transparent border-bottom text-uppercase">
-                            <i class="fas fa-list pr-1"></i> Ewaybill List
+                            <i class="fas fa-check-square fa-lg"></i> Group Ewaybill List
                         </h4>
                         <div class="col-12">
                             {{-- <div class="card">
@@ -537,29 +549,6 @@
                                 <!-- end col -->
                             </div>
 
-                            {{-- <div class="row">
-                                        <div class="col-lg-11 mb-3">
-                                            <div class="d-flex flex-wrap gap-2">
-                                                <button name="addtogrp" type="button"
-                                                    class="btn btn-primary btn-sm waves-effect waves-light" id="groupList"> <i
-                                                        class="mdi mdi-12px mdi-account-group-outline"></i> Add To Tracking</button>
-                                                <button name="unload" type="button"
-                                                    class="btn btn-warning btn-sm waves-effect waves-light" id="unloadList"> <i
-                                                        class="mdi mdi-12px mdi-delete-alert-outline"></i> Unload</button>
-                                                <button name="refresh" type="button"
-                                                    class="btn btn-primary btn-sm waves-effect waves-light" id="Refresh"> <i
-                                                        class="mdi mdi-12px mdi-refresh"></i> Refresh</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-1 mb-3 text-end">
-                                            <button name="reset" type="button" class="btn btn-danger btn-sm waves-effect waves-light"
-                                                id="Reset"> <i class="mdi mdi-lock-reset"></i> Reset</button>
-                                        </div>
-                                    </div> --}}
-
-
-
                             <!-- Button trigger modal -->
 
                             <div class="modal fade exampleModal" tabindex="-1" role="dialog"
@@ -600,8 +589,10 @@
                                                             <th>LR Date</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr id="form-data"></tr>
+                                                    <tbody id="form-data">
+
+                                                            {{-- data fetch from ajax --}}
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -615,31 +606,22 @@
                                 </div>
                             </div>
 
-
-                            <form id="tracking-form">
-                                {{-- <form id="my-form1" method="post" action="{{route('ewb.AddtoTracking')}}" > --}}
+                           <form id="tracking-form">
                                 @csrf
-                                <button type="submit" id="btntracksubmit"
-                                    class="btn mb-2 btn-primary btn-sm waves-effect waves-light" data-toggle="modal"
-                                    data-target=".exampleModal" onclick="vehicleselectioncheck()">
-                                    <i class="mdi mdi-12px mdi-account-group-outline"></i> Add To Tracking
-                                </button>
+
                                 <table id="records" class="table table-bordered yajra-datatable"
                                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th>Select</th>
                                             <th>Vehicle NO</th>
-                                            <th>Eway Bill No</th>
-                                            <th>Eway Bill Date</th>
-                                            <th>From Place</th>
-                                            <th>To Place</th>
+                                            <th>From Place</th>>
+                                            <th>Mobile No</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                 </table>
                             </form>
-                            {{-- </div>
-                            </div> --}}
+
                         </div> <!-- end col -->
                     </div> <!-- end row -->
 
@@ -680,7 +662,7 @@
                 }
             });
             $.ajax({
-                url: "{{ route('ewb.getEwayBillList') }}",
+                url: "{{ route('ewb.getGroupList') }}",
                 type: "POST",
                 data: {
                     start_date: start_date,
@@ -703,30 +685,23 @@
                         "data": data.vem,
                         //responsive
                         "responsive": true,
-                        "columns": [{
-                                "data": "id",
-                                render: function(data, type, row, meta) {
-                                    $id = (row.id);
-                                    $html =
-                                        "<input type='checkbox' id='vemid' name='vemid[]'  value='" +
-                                        $id + "'>";
-                                    return $html;
-                                }
-                            },
+                        "columns": [
                             {
                                 "data": "vehicleno",
                             },
                             {
-                                "data": "ewaybills.ewbNo",
+                                "data": "fromPlace",
                             },
                             {
-                                "data": "ewaybills.ewayBillDate",
+                                "data": "mobile",
                             },
                             {
-                                "data": "ewaybills.fromPlace",
-                            },
-                            {
-                                "data": "ewaybills.toPlace",
+                                "data": "id",
+                                render: function(data, type, row, meta) {
+                                    $id = (row.id);
+                                    $html ='<div class="text-center"><a href="{{url('EwayBills/Workspace/VehicleDetailView')}}/'+$id+'"  type="button" class="btn btn-success btn-sm waves-effect waves-light">View</a></div>';
+                                    return $html;
+                                }
                             },
                         ]
                     });
@@ -755,109 +730,10 @@
             var fromPlace = $("#fromPlace").val();
             var toPlace = $("#toPlace").val();
 
-            // var pera = [];
-            // pera["start_date"] = $("#start_date").val();
-            // pera["end_date"] = $("#end_date").val();
-            // pera["vehicleNo"] = $("#vehicleNo").val();
-            // pera["ewbNo"] = $("#ewbNo").val();
-            // pera["fromPlace"] = $("#fromPlace").val();
-            // pera["toPlace"] = $("#toPlace").val();
-
             fetch(start_date, end_date, vehicleNo, ewbNo, fromPlace, toPlace);
             // fetch(pera);
         }
 
-        function vehicleselectioncheck() {
-
-            var mydata = jQuery('#records').find('input[type="checkbox"]:checked').serialize();
-            if (!mydata) {
-                event.preventDefault();
-                alert("Plz Select E way bill")
-                $('#btntracksubmit').removeAttr('data-toggle');
-            } else {
-                $('#btntracksubmit').attr("data-toggle", "modal");
-            }
-        }
-
-        $(document).ready(function() {
-            $('#tracking-form').submit(function(event) {
-
-                // for stop refreshing page
-                event.preventDefault();
-                var form = $("#tracking-form")[0];
-                var data = new FormData(form);
-                // for disable submit button
-                $("#btntracksubmit").prop("disabled", true);
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('ewb.AddtoTracking') }}",
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    success: function(result) {
-                        if (result.message == "Fail") {
-
-                            $('#btntracksubmit').removeAttr('data-toggle');
-                            event.preventDefault();
-                            $("#btntracksubmit").prop("disabled", false);
-                        } else {
-                            // alert('hi');
-                            $('#btntracksubmit').attr("data-toggle", "modal");
-                            $("#form-data").html(result.html);
-                            $("#btntracksubmit").prop("disabled", false);
-                        }
-
-                    },
-                    error: function(e) {
-                        console.log(e.responseText);
-                        $("#btntracksubmit").prop("disabled", false);
-                    }
-                });
-
-            });
-        });
-
-
-        // $('#group-form').submit(function(event) {
-        //     $(document).on('submit', "#group-form", function() {
-        //         $("body").on("click", "#btngroupsubmit", function(event) {
-
-            $(document).ready(function() {
-                $('#group-form').submit(function(event) {
-
-                    // for stop refreshing page
-                    event.preventDefault();
-                    var form = $("#group-form")[0];
-                    var data = new FormData(form);
-                    console.log(data);
-                    data.append('_token', '{{ csrf_token() }}');
-                    // alert(data);
-                    // for disable submit button
-
-                    return false;
-                    $("#btngroupsubmit").prop("disabled", true);
-
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('ewb.AddtoGroup') }}",
-                        data: data,
-                        processData: false,
-                        contentType: false,
-                        success: function(result) {
-
-                            // alert('hi');
-                            // $("#form-data").html(result.html);
-                            $("#btngroupsubmit").prop("disabled", false);
-                            //window.location.href = "{{ route('ewb') }}";
-                            location.reload();
-                        },
-                        error: function(e) {
-                            console.log(e.responseText);
-                            $("#btngroupsubmit").prop("disabled", false);
-                        }
-                    });
-                });
-            });
-        // });
     </script>
+
 @endsection

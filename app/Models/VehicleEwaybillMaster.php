@@ -11,6 +11,11 @@ class VehicleEwaybillMaster extends Model
     public $timestamps = false;
 
     public function ewaybills(){
+
         return $this->belongsTo(ewaybill::class,'eid');
     }
+    public function vehicles(){
+        return $this->belongsTo(vehicle::class,'vid');
+    }
+
 }

@@ -15,5 +15,8 @@ class Ewaybill extends Model
         return $this->belongsTo(\App\Models\Ewbmasters::class);
     }
 
+    public function vehiclegroup(){
+        return $this->hasManyThrough(vewbgroup::class,VehicleEwaybillMaster::class,'eId','vewbId','id','id');
+    }
 }
 

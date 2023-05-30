@@ -14,6 +14,19 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('vehicleno');
+            $table->string('updMode');
+            $table->string('fromPlace');
+            $table->integer('fromState');
+            $table->integer('tripshtNo');
+            $table->string('userGSTINTransin');
+            $table->date('enteredDate');
+            $table->integer('transMode');
+            $table->string('transDocNo');
+            $table->date('transDocDate');
+            $table->string('groupNo');
+            $table->double('mobile')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->date('groupdate')->nullable();
             $table->timestamps();
         });
     }
